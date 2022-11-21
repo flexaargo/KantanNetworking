@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Removed content type and base url from Routable
+- Changed RemoteClient protocol
+- Added APIClient async/await support
+- Reduced number of KantanError types
 - Upgrade swift tools version to 5.7
 - Removed remote image
 - Support package editing in vscode
