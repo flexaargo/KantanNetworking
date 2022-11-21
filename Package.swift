@@ -17,9 +17,11 @@ let package = Package(
   targets: [
     .target(
       name: "KantanNetworking",
-      dependencies: []),
+      dependencies: [],
+      path: "Sources"),
     .testTarget(
       name: "KantanNetworkingTests",
-      dependencies: ["KantanNetworking"]),
+      dependencies: ["KantanNetworking"],
+      path: "Tests"),
   ]
 )
