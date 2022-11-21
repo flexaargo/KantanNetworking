@@ -8,30 +8,31 @@
 import Foundation
 
 extension Routable {
-  func makeUrlComponents() -> URLComponents {
+
+  /// Creates `URLComponents` from its properties.
+  ///
+  /// Configures the URLComponents with:
+  ///   - `URLComponents.scheme` set to `"https"`
+  ///   - `URLComponents.path` set to `path` if not `nil`
+  ///   - `URLComponents.queryItems` set to `parameters`
+  ///
+  /// - Returns: An instance of `URLComponents`
+  func urlComponents() -> URLComponents {
     var urlComponents = URLComponents()
-    urlComponents.host = baseUrl
     urlComponents.scheme = "https"
-    urlComponents.path = path
-    let queryItems = parameters.compactMap { key, value in URLQueryItem(name: key, value: "\(value)") }
-    urlComponents.queryItems = queryItems.count > 0 ? queryItems : nil
+    if let path { urlComponents.path = path }
+    urlComponents.queryItems = queryItems()
     return urlComponents
   }
 
-  func makeUrl() -> URL? {
-    let urlComponents = makeUrlComponents()
-    return urlComponents.url
+}
+
+private extension Routable {
+
+  /// Creates an array of `URLQueryItem` from its parameters.
+  /// - Returns: An array of `URLQueryItem` or `nil` if no parameters.
+  func queryItems() -> [URLQueryItem]? {
+    parameters?.map({ URLQueryItem(name: $0, value: $1) })
   }
 
-  func makeUrlRequest() -> URLRequest? {
-    guard let url = makeUrl() else { return nil }
-    var request = URLRequest(url: url)
-    request.allHTTPHeaderFields = headers ?? [:]
-    if contentType != .none {
-      request.allHTTPHeaderFields?["Content-Type"] = contentType.rawValue
-    }
-    request.httpBody = body?.data()
-
-    return request
-  }
 }

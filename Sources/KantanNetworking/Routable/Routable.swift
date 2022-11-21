@@ -9,8 +9,8 @@
 import Foundation
 
 public typealias HTTPHeaders = [String: String]
-public typealias HTTPBody = [String: AnyHashable]
-public typealias HTTPParameters = [String: AnyHashable]
+public typealias HTTPBody = Data
+public typealias HTTPParameters = [String: String]
 
 public enum HTTPMethod: String {
   case get    = "GET"
@@ -20,17 +20,10 @@ public enum HTTPMethod: String {
   case delete = "DELETE"
 }
 
-public enum HTTPContentType: String {
-  case json   = "application/json"
-  case none   = ""
-}
-
 public protocol Routable {
-  var baseUrl: String { get }
   var method: HTTPMethod { get }
-  var path: String { get }
-  var parameters: HTTPParameters { get }
+  var path: String? { get }
+  var parameters: HTTPParameters? { get }
   var body: HTTPBody? { get }
   var headers: HTTPHeaders? { get }
-  var contentType: HTTPContentType { get }
 }

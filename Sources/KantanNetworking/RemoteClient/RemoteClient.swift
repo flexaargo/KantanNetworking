@@ -5,50 +5,24 @@
 //  Created by Alex Fargo on 9/8/20.
 //
 
-#if(os(iOS))
-
 import Foundation
-import SwiftUI
-import Combine
 
-public protocol RemoteClient: AnyObject {
-  init(configuration: RemoteConfiguration)
+/// A `RemoteClient` is configured and used to make network requests to a single host.
+public protocol RemoteClient {
 
-  /// Makes URLComponents from a given routable.
-  /// - Parameter routable: Contains information about the `URL` and `URLRequest`.
-  func makeUrlComponents(from routable: Routable) -> URLComponents
-  /// Makes URL from a given routable.
-  /// - Parameter routable: Contains information about the `URL` and `URLRequest`.
-  func makeUrl(from routable: Routable) throws -> URL
-  /// Makes URLRequest from a given routable.
-  /// - Parameter routable: Contains information about the `URL` and `URLRequest`.
-  func makeUrlRequest(from routable: Routable) throws -> URLRequest
+  /// Used to configure how the `RemoteClient` is setup and behaves.
+  var configuration: RemoteConfiguration { get }
 
-  // MARK: - Completions
-
-  /// Makes a request for a routable and completes with a result. The result with either contain the
-  /// wanted `Response` or an `Error`.
+  /// Makes a request to the configured host using information from the ``Routable``. Decodes a `Response` from the the data payload. This method will throw an error if the HTTP response is not OK or if there was an error decoding the `Response`
   /// - Parameters:
-  ///   - routable: The routable to make a request for.
-  ///   - completion: Closure to execute with given result.
-  func request<Response>(for routable: Routable, completion: @escaping (Result<Response, Error>) -> Void) where Response: Decodable
+  ///   - responseType: The expected response type from the request.
+  ///   - route: The ``Routable`` used to configure the request.
+  /// - Returns: An instance of the ``Response``
+  func request<Response>(_ responseType: Response.Type, from route: Routable) async throws -> Response where Response: Decodable
 
-  /// Makes a request for a routable and completes with a result. The result with either contain a
-  /// `UIImage` or an `Error`.
-  /// - Parameters:
-  ///   - routable: The routable to make a request for.
-  ///   - completion: Closure to execute with given result.
-  func requestImage(for routable: Routable, completion: @escaping (Result<UIImage, Error>) -> Void)
+  /// Creates a URL from the `route` using the configured host.
+  /// - Parameter route: The ``Route`` used to create the `URL`
+  /// - Returns: A `URL` instance
+  func createURL(from route: Routable) throws -> URL
 
-  // MARK: - Publishers
-
-  /// Creates a Publisher that emits a `Response` or an `Error`.
-  /// - Parameter routable: The routable to make a request for.
-  func requestPublisher<Response>(for routable: Routable) -> AnyPublisher<Response, Error> where Response: Decodable
-
-  /// Creates a Publisher that emits a `UIImage` or an `Error`.
-  /// - Parameter routable: The routable to make a request for.
-  func requestImagePublisher(for routable: Routable) -> AnyPublisher<UIImage, Error>
 }
-
-#endif
