@@ -10,4 +10,6 @@
         "-Xswiftc",
         "x86_64-apple-ios16.1-simulator",
     ],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
 }

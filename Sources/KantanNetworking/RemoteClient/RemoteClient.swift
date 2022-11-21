@@ -11,21 +11,6 @@ import Foundation
 import SwiftUI
 import Combine
 
-/// Used to configure a `RemoteClient`.
-public struct RemoteConfiguration {
-  public private(set) var decoder: JSONDecoder = JSONDecoder()
-
-  public init() { }
-
-  public init(decoder: JSONDecoder) {
-    self.decoder = decoder
-  }
-
-  public init(decoder: () -> JSONDecoder) {
-    self.decoder = decoder()
-  }
-}
-
 public protocol RemoteClient: AnyObject {
   init(configuration: RemoteConfiguration)
 

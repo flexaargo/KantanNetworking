@@ -1,40 +1,13 @@
 //
-//  Routable.swift
+//  Routable+URLComponents.swift
 //  KantanNetworking
 //
-//  Created by Alex Fargo on 9/8/20.
+//  Created by  Alex Fargo on 11/20/22
 //
 
 import Foundation
 
-public typealias HTTPHeaders = [String: String]
-public typealias HTTPBody = [String: AnyHashable]
-public typealias HTTPParameters = [String: AnyHashable]
-
-public enum HTTPMethod: String {
-  case get    = "GET"
-  case post   = "POST"
-  case put    = "PUT"
-  case patch  = "PATCH"
-  case delete = "DELETE"
-}
-
-public enum HTTPContentType: String {
-  case json   = "application/json"
-  case none   = ""
-}
-
-public protocol Routable {
-  var baseUrl: String { get }
-  var method: HTTPMethod { get }
-  var path: String { get }
-  var parameters: HTTPParameters { get }
-  var body: HTTPBody? { get }
-  var headers: HTTPHeaders? { get }
-  var contentType: HTTPContentType { get }
-}
-
-internal extension Routable {
+extension Routable {
   func makeUrlComponents() -> URLComponents {
     var urlComponents = URLComponents()
     urlComponents.host = baseUrl
