@@ -9,6 +9,11 @@
         "-target",
         "-Xswiftc",
         "x86_64-apple-ios16.1-simulator",
+        "-Xswiftc",
+        "-target",
+        "-Xswiftc",
+        // I bet this is going to cause issues on M1...
+        "x86_64-apple-macosx",
     ],
     "editor.tabSize": 2,
     "editor.insertSpaces": true
