@@ -7,8 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Upgrade swift tools version to 5.7
+- Removed remote image
+- Support package editing in vscode
+
 ## [0.0.1] - 2020-09-13
 
 ### Added
 
 - Created the project on GitHub
+
+[unreleased]: https://github.com/flexaargo/KantanNetworking/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/flexaargo/KantanNetworking/releases/tag/v0.0.1

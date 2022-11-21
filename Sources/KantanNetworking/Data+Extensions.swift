@@ -12,7 +12,7 @@ internal extension Dictionary where Key == String, Value == AnyHashable {
   func data() -> Data? {
     try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
   }
-  
+
   /// Adds the right hand dictionary to the left hand dictionary. If a key already exists in the left hand side, then
   /// the associated value is replaced with the right hand side's value.
   /// - Parameters:

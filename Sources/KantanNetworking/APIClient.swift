@@ -5,27 +5,29 @@
 //  Created by Alex Fargo on 9/9/20.
 //
 
+#if(os(iOS))
+
 import Foundation
 import Combine
 import SwiftUI
 
 open class APIClient: RemoteClient {
   private var configuration: RemoteConfiguration
-  
+
   private var urlSession: URLSession
   private var decoder: JSONDecoder
-  
+
   private var localCancellables: Set<AnyCancellable> = Set()
-  
+
   required public init(configuration: RemoteConfiguration = RemoteConfiguration()) {
     self.configuration = configuration
-    
+
     let sessionConfig: URLSessionConfiguration = .default
     urlSession = URLSession(configuration: sessionConfig)
-    
+
     decoder = configuration.decoder
   }
-  
+
   /// Creates `URLComponents` from a given routable. The scheme used is HTTPS.
   ///
   /// Configuration:
@@ -44,7 +46,7 @@ open class APIClient: RemoteClient {
     urlComponents.queryItems = queryItems.count > 0 ? queryItems : nil
     return urlComponents
   }
-  
+
   /// Creates a `URL` from a given routable by getting the URL from `makeUrlComponents(from:)`.
   /// - Parameter routable: Contains information about the `URL` and `URLRequest`.
   /// - Throws: `KantanError.makeUrl(reason:)` if the `URL` from `URLComponents` is nil.
@@ -55,7 +57,7 @@ open class APIClient: RemoteClient {
     }
     return url
   }
-  
+
   /// Creates a `URLRequest` from a given routable with a `URL` from `makeUrl(from:)`. Also configures the header
   /// with the `Routable` headers and Content-Type as well as the body with the `Routable` body as `Data`.
   /// - Parameter routable: Contains information about the `URL` and `URLRequest`.
@@ -75,9 +77,9 @@ open class APIClient: RemoteClient {
       throw KantanError.makeUrlRequest(reason: reason)
     }
   }
-  
+
   // MARK: - Completions
-  
+
   /// Makes a request for a `Routable` and will complete with a `Result` that is either a
   /// `Decodable` type or an `Error`. The `Decodable` type will be decoded from the response body.
   /// If the `Response` type is `Bool`, the `Bool` will represent success.
@@ -100,7 +102,7 @@ open class APIClient: RemoteClient {
       })
       .store(in: &localCancellables)
   }
-  
+
   /// Makes a request for a `Routable` and will complete with a `Result` that is either a `UIImage`
   /// type or an `Error`. The `UIImage` type will be created from the data in the response body.
   /// - Parameters:
@@ -121,9 +123,9 @@ open class APIClient: RemoteClient {
       })
       .store(in: &localCancellables)
   }
-  
+
   // MARK: - Publishers
-  
+
   /// Makes a `Publisher` that will emit either a `Response` decoded from the response body data or
   /// an `Error`.
   /// If the `Response` type is `Bool`, the `Bool` will represent success.
@@ -132,7 +134,7 @@ open class APIClient: RemoteClient {
   public func requestPublisher<Response>(for routable: Routable) -> AnyPublisher<Response, Error> where Response: Decodable {
     requestInternal(for: routable)
   }
-  
+
   /// Makes a `Publisher` that will emit either a `UIImage` created from the response body data or
   /// an `Error`.
   /// - Parameter routable: Contains information about the `URL` and `URLRequest`.
@@ -153,12 +155,12 @@ internal extension APIClient {
       return Fail(error: KantanError.unknown()).eraseToAnyPublisher()
     }
   }
-  
+
   func requestInternal(withURL url: URL) -> AnyPublisher<UIImage, Error> {
     let request = URLRequest(url: url)
     return requestInternal(withRequest: request)
   }
-  
+
   func requestInternal(withRequest request: URLRequest) -> AnyPublisher<UIImage, Error> {
     dataTaskPublisher(withRequest: request)
       .tryMap { data -> UIImage in
@@ -183,12 +185,12 @@ internal extension APIClient {
       return Fail(error: KantanError.unknown()).eraseToAnyPublisher()
     }
   }
-  
+
   func requestInternal<Response>(withURL url: URL) -> AnyPublisher<Response, Error> where Response: Decodable {
     let request = URLRequest(url: url)
     return requestInternal(withRequest: request)
   }
-  
+
   func requestInternal<Response>(withRequest request: URLRequest) -> AnyPublisher<Response, Error> where Response: Decodable {
     dataTaskPublisher(withRequest: request)
       .tryMap { [weak self] data -> Response in
@@ -241,3 +243,5 @@ private extension APIClient {
       .eraseToAnyPublisher()
   }
 }
+
+#endif
