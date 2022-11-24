@@ -26,6 +26,7 @@ extension RemoteClient {
         let url = try createURL(from: route)
         var request = URLRequest(url: url)
         request.httpMethod = route.method.rawValue
+        configuration.defaultHeaders?.forEach { request.addValue($1, forHTTPHeaderField: $0) }
         route.headers?.forEach { request.addValue($1, forHTTPHeaderField: $0) }
         request.httpBody = route.body
         return request

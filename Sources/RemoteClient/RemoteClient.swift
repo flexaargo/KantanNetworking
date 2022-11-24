@@ -10,7 +10,7 @@ import Foundation
 /// A `RemoteClient` is configured and used to make network requests to a single host.
 public protocol RemoteClient {
     /// Used to configure how the `RemoteClient` is setup and behaves.
-    var configuration: RemoteConfiguration { get }
+    var configuration: RemoteConfiguration { get set }
 
     /// Makes a request to the configured host using information from the ``Routable``. Decodes a `Response` from the the data payload. This method will throw an error if the HTTP response is not OK or if there was an error decoding the `Response`
     /// - Parameters:

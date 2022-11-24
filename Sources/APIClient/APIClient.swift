@@ -8,11 +8,10 @@
 import Foundation
 
 public final class APIClient: RemoteClient {
-    public let configuration: RemoteConfiguration
+    public var configuration: RemoteConfiguration
 
     private lazy var urlSession: URLSession = {
         let sessionConfig: URLSessionConfiguration = .default
-        sessionConfig.httpAdditionalHeaders = configuration.defaultHeaders
         return URLSession(configuration: sessionConfig)
     }()
 

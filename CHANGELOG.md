@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- APIClient now has a mutable configuration
 - Added swiftformat and pre-commit hook which can be setup with ./scripts/git_hooks/setup
 - Removed content type and base url from Routable
 - Changed RemoteClient protocol
