@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 NORMAL=$(tput sgr0)
+BOLD=$(tput bold)
 
 YELLOW=$(tput setaf 3)
 
