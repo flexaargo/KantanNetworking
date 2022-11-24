@@ -19,7 +19,10 @@ public enum KantanError: Error, CustomStringConvertible {
         case let .invalidResponse(data, response):
             let dataString = String(data: data, encoding: .utf8) ?? "None"
             let responseString = response != nil ? "\(response!.statusCode)" : "None"
-            description.append("Received invalid response. Data: \(dataString) Response: \(responseString)")
+            description
+                .append(
+                    "Received invalid response. Data: \(dataString) Response: \(responseString)"
+                )
         }
         return description
     }

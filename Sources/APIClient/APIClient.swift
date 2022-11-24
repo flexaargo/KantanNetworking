@@ -26,14 +26,17 @@ public final class APIClient: RemoteClient {
         self.init(configuration: configuration)
     }
 
-    public func request<Response>(_ responseType: Response.Type, from route: Routable) async throws -> Response where Response: Decodable {
+    public func request<Response>(
+        _ responseType: Response.Type,
+        from route: Routable
+    ) async throws -> Response where Response: Decodable {
         let urlRequest = try createURLRequest(from: route)
         let (data, response) = try await urlSession.data(for: urlRequest)
         guard let response = response as? HTTPURLResponse else {
             throw KantanError.invalidResponse(data: data)
         }
 
-        guard 200 ..< 400 ~= response.statusCode else {
+        guard 200..<400 ~= response.statusCode else {
             throw KantanError.invalidResponse(data: data, response: response)
         }
 

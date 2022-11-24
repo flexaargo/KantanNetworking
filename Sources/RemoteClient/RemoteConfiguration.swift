@@ -16,7 +16,11 @@ public struct RemoteConfiguration {
     /// A JSON decoder used to decode `Data`.
     public var decoder: JSONDecoder
 
-    public init(host: String, defaultHeaders: HTTPHeaders? = nil, decoder: JSONDecoder = JSONDecoder()) {
+    public init(
+        host: String,
+        defaultHeaders: HTTPHeaders? = nil,
+        decoder: JSONDecoder = JSONDecoder()
+    ) {
         self.host = host
         self.defaultHeaders = defaultHeaders
         self.decoder = decoder

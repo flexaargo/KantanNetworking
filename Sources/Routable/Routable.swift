@@ -12,6 +12,8 @@ public typealias HTTPHeaders = [String: String]
 public typealias HTTPBody = Data
 public typealias HTTPParameters = [String: String]
 
+// MARK: - HTTPMethod
+
 /// HTTP request methods
 public enum HTTPMethod: String {
     case get = "GET"
@@ -20,6 +22,8 @@ public enum HTTPMethod: String {
     case patch = "PATCH"
     case delete = "DELETE"
 }
+
+// MARK: - Routable
 
 public protocol Routable {
     /// The method to use for the request for this route

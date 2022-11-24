@@ -1,0 +1,105 @@
+--disable all
+
+--enable acronyms
+--acronyms ID,UUID,URL,HTTP
+
+--enable andOperator
+--enable anyObjectProtocol
+--enable assertionFailures
+--enable blankLineAfterImports
+--enable blankLinesAroundMark
+--enable blankLinesAtEndOfScope
+--enable blankLinesAtStartOfScope
+--enable blankLinesBetweenImports
+--enable blankLinesBetweenScopes
+--enable blockComments
+--enable braces
+--enable consecutiveBlankLines
+--enable consecutiveSpaces
+--enable duplicateImports
+--enable elseOnSameLine
+--enable emptyBraces
+--enable enumNamespaces
+--enable extensionAccessControl
+--enable hoistPatternLet
+
+--enable indent
+--indent 4
+
+--enable initCoderUnavailable
+--enable leadingDelimiters
+--enable linebreakAtEndOfFile
+--enable linebreaks
+--enable modifierOrder
+--enable numberFormatting
+--enable opaqueGenericParameters
+--enable preferDouble
+--enable preferKeyPath
+--enable redundantBackticks
+--enable redundantBreak
+--enable redundantClosure
+--enable redundantExtensionACL
+--enable redundantFileprivate
+--enable redundantGet
+--enable redundantInit
+--enable redundantLet
+--enable redundantLetError
+--enable redundantNilInit
+--enable redundantObjc
+--enable redundantOptionalBinding
+--enable redundantParens
+--enable redundantPattern
+--enable redundantReturn
+--enable redundantType
+--enable redundantVoidReturnType
+--enable semicolons
+--enable sortDeclarations
+
+--enable sortedImports
+--importgrouping testable-last
+
+--enable sortedSwitchCases
+--enable spaceAroundBraces
+--enable spaceAroundBrackets
+--enable spaceAroundComments
+--enable spaceAroundGenerics
+
+--enable spaceAroundOperators
+--ranges no-space
+
+--enable spaceAroundParens
+--enable spaceInsideBraces
+--enable spaceInsideBrackets
+--enable spaceInsideComments
+--enable spaceInsideGenerics
+--enable spaceInsideParens
+--enable strongifiedSelf
+--enable todos
+--enable trailingCommas
+--enable trailingSpace
+--enable typeSugar
+
+--enable unusedArguments
+--stripunusedargs closure-only
+
+--enable void
+
+--enable wrap
+--maxwidth 100
+
+--enable wrapArguments
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--wrapconditions before-first
+--wraptypealiases before-first
+
+--enable wrapAttributes
+--funcattributes prev-line
+--typeattributes prev-line
+--varattributes prev-line
+
+--enable wrapEnumCases
+--enable wrapSingleLineComments
+--enable wrapSwitchCases
+--enable yodaConditions

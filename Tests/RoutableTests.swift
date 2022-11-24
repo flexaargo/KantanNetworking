@@ -5,8 +5,8 @@
 //  Created by  Alex Fargo on 11/21/22
 //
 
-@testable import KantanNetworking
 import XCTest
+@testable import KantanNetworking
 
 class RoutableTests: XCTestCase {
     func testEmptyRoutable() {
@@ -19,7 +19,11 @@ class RoutableTests: XCTestCase {
     }
 
     func testFilledRoutable() {
-        let route: Routable = MockRoute(method: .get, path: "/path/to/api", parameters: ["parameter": "some value"])
+        let route: Routable = MockRoute(
+            method: .get,
+            path: "/path/to/api",
+            parameters: ["parameter": "some value"]
+        )
         let components = route.urlComponents()
 
         XCTAssert(components.scheme == "https")
