@@ -3,25 +3,27 @@
 import PackageDescription
 
 let package = Package(
-  name: "KantanNetworking",
-  platforms: [
-    .iOS(.v13),
-    .macOS(.v10_15)
-  ],
-  products: [
-    .library(
-      name: "KantanNetworking",
-      targets: ["KantanNetworking"]),
-  ],
-  dependencies: [],
-  targets: [
-    .target(
-      name: "KantanNetworking",
-      dependencies: [],
-      path: "Sources"),
-    .testTarget(
-      name: "KantanNetworkingTests",
-      dependencies: ["KantanNetworking"],
-      path: "Tests"),
-  ]
+    name: "KantanNetworking",
+    platforms: [
+        .iOS(.v13),
+        .macOS(.v10_15),
+    ],
+    products: [
+        .library(
+            name: "KantanNetworking",
+            targets: ["KantanNetworking"]
+        ),
+    ],
+    targets: [
+        .target(
+            name: "KantanNetworking",
+            dependencies: [],
+            path: "Sources"
+        ),
+        .testTarget(
+            name: "KantanNetworkingTests",
+            dependencies: ["KantanNetworking"],
+            path: "Tests"
+        ),
+    ]
 )

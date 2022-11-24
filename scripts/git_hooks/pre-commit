@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+NORMAL=$(tput sgr0)
+BOLD=$(tput bold)
+
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+
+# Get files in diff
+# The diff is filtered by added, changed, modified and renamed
+# Only get files that end in .swift
+FILES=$(git diff --staged --name-only --diff-filter=ACMR | grep -E '\.swift$' | tr "\n" " ")
+
+if [[ -z "$FILES" ]]; then
+  echo "${BOLD}${YELLOW}Formatter:${NORMAL}${YELLOW} No files to format${NORMAL}"
+  exit 1
+fi
+
+# TODO: @flexaargo Check if swiftformat is installed
+
+echo "${BOLD}Formatting the following files:${NORMAL}"
+echo "$FILES" | tr " " "\n"
+
+swiftformat $FILES
+
+exit 0

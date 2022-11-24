@@ -1,6 +1,6 @@
 {
     "sourcekit-lsp.serverPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "files.insertFinalNewline": true
 }

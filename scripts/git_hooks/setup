@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+NORMAL=$(tput sgr0)
+BOLD=$(tput bold)
+START_UNDERLINE=$(tput smul)
+END_UNDERLINE=$(tput rmul)
+
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+MAGENTA=$(tput setaf 5)
+
+# Check that current directory is named KantanNetworking
+CURRENT_DIR_NAME="$(basename $(pwd))"
+if [[ "$CURRENT_DIR_NAME" != "KantanNetworking" ]]; then
+  echo "${RED} Please run this script from the project root${NORMAL}"
+  exit 1
+fi
+
+# Setup the pre commit hook
+EXISTING_HOOK="scripts/git_hooks/pre-commit"
+LINK_LOCATION=".git/hooks/pre-commit"
+echo "Setting up the pre-commit Git hook"
+
+if test -L "$LINK_LOCATION" || test -e "$LINK_LOCATION"; then
+  echo "${RED}A pre-commit hook already exists at ${START_UNDERLINE}${LINK_LOCATION}${END_UNDERLINE}. Please remove it then re-run this script${NORMAL}"
+  exit 1
+fi
+
+echo "${MAGENTA}Creating symbolic link for ${START_UNDERLINE}${EXISTING_HOOK}${END_UNDERLINE} in ${START_UNDERLINE}${LINK_LOCATION}${NORMAL}"
+ln -s "$(pwd)/${EXISTING_HOOK}" "$(pwd)/${LINK_LOCATION}"
