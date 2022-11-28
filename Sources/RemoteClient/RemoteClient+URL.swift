@@ -9,8 +9,7 @@ import Foundation
 
 public extension RemoteClient {
     func createURL(from route: Routable) throws -> URL {
-        var urlComponents = route.urlComponents()
-        urlComponents.host = configuration.host
+        let urlComponents = route.urlComponents(withHost: configuration.host)
         guard let url = urlComponents.url else {
             throw KantanError.failedToCreateURL(route: route, host: configuration.host)
         }

@@ -38,6 +38,8 @@ public protocol Routable {
     var headers: HTTPHeaders? { get }
 }
 
+// MARK: - Default Values
+
 public extension Routable {
     /// Default to nil.
     var parameters: HTTPParameters? { nil }

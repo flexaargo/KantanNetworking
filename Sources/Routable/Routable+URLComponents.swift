@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Routable {
+public extension Routable {
     /// Creates `URLComponents` from its properties.
     ///
     /// Configures the URLComponents with:
@@ -15,9 +15,12 @@ extension Routable {
     ///   - `URLComponents.path` set to `path` if not `nil`
     ///   - `URLComponents.queryItems` set to `parameters`
     ///
+    /// - Parameters:
+    ///   - host: The host component to use for the `URLComponents`
     /// - Returns: An instance of `URLComponents`
-    func urlComponents() -> URLComponents {
+    func urlComponents(withHost host: String) -> URLComponents {
         var urlComponents = URLComponents()
+        urlComponents.host = host
         urlComponents.scheme = "https"
         if let path { urlComponents.path = path }
         urlComponents.queryItems = queryItems()

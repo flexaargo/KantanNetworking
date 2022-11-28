@@ -11,8 +11,9 @@ import XCTest
 class RoutableTests: XCTestCase {
     func testEmptyRoutable() {
         let route: Routable = MockRoute(method: .get)
-        let components = route.urlComponents()
+        let components = route.urlComponents(withHost: "host.com")
 
+        XCTAssert(components.host == "host.come")
         XCTAssert(components.scheme == "https")
         XCTAssert(components.path.isEmpty)
         XCTAssertNil(components.queryItems)
@@ -24,8 +25,9 @@ class RoutableTests: XCTestCase {
             path: "/path/to/api",
             parameters: ["parameter": "some value"]
         )
-        let components = route.urlComponents()
+        let components = route.urlComponents(withHost: "host.com")
 
+        XCTAssert(components.host == "host.com")
         XCTAssert(components.scheme == "https")
         XCTAssert(components.path == "/path/to/api")
         XCTAssert(components.queryItems == [URLQueryItem(name: "parameter", value: "some value")])
