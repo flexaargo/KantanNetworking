@@ -22,4 +22,6 @@ echo "$FILES" | tr " " "\n"
 
 swiftformat $FILES
 
+git add $FILES
+
 exit 0

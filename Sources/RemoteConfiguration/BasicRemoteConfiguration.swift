@@ -8,7 +8,6 @@
 import Foundation
 
 public struct BasicRemoteConfiguration: RemoteConfiguration {
-
     public var host: String
 
     public var defaultHeaders: HTTPHeaders?
