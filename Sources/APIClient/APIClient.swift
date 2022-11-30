@@ -22,7 +22,7 @@ public final class APIClient: RemoteClient {
     }
 
     public convenience init(host: String) {
-        let configuration = RemoteConfiguration(host: host)
+        let configuration = BasicRemoteConfiguration(host: host)
         self.init(configuration: configuration)
     }
 

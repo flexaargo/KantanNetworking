@@ -13,7 +13,7 @@ class RoutableTests: XCTestCase {
         let route: Routable = MockRoute(method: .get)
         let components = route.urlComponents(withHost: "host.com")
 
-        XCTAssert(components.host == "host.come")
+        XCTAssert(components.host == "host.com")
         XCTAssert(components.scheme == "https")
         XCTAssert(components.path.isEmpty)
         XCTAssertNil(components.queryItems)
